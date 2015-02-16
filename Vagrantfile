@@ -31,7 +31,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         database_password: 'password',
         database_server: 'localhost',
         apps_server: 'localhost',
-        domain_name: 'rundeck.dev'
+        domain_name: 'rundeck.dev',
+        ssh_user: 'sysadmin',
+        ssh_key_path: '/var/lib/rundeck/.ssh/id_rsa'
       }
     }
 

@@ -30,8 +30,8 @@ framework.libext.dir=/var/lib/rundeck/libext
 # SSH defaults for node executor and file copier
 # ----------------------------------------------------------------
 
-framework.ssh.keypath = /var/lib/rundeck/.ssh/id_rsa
-framework.ssh.user = rundeck
+framework.ssh.keypath = <%= node['rundeck']['ssh_key_path'] %>
+framework.ssh.user = <%= node['rundeck']['ssh_user'] %>
 
 # ssh connection timeout after a specified number of milliseconds.
 # "0" value means wait forever.

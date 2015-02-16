@@ -17,6 +17,8 @@ Install and configure [Rundeck](http://www.rundeck.org)
 * default['rundeck']['database_server'] = 'localhost'
 * default['rundeck']['apps_server'] = 'localhost'
 * default['rundeck']['domain_name'] = 'rundeck.dev'
+* default['rundeck']['ssh_user'] = 'rundeck'
+* default['rundeck']['ssh_key_path'] = '/var/lib/rundeck/.ssh/id_rsa'
 
 ## Usage
 
