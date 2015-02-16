@@ -13,7 +13,7 @@ platforms:
       network:
         - ['private_network', {ip: '172.28.128.3'}]
       customize:
-        memory: 2048
+        memory: 1024
         cpus: 2
   - name: debian
     driver:
@@ -24,7 +24,7 @@ platforms:
       network:
         - ['private_network', {ip: '172.28.128.4'}]
       customize:
-        memory: 2048
+        memory: 1024
         cpus: 2
 
 provisioner:
@@ -37,6 +37,17 @@ suites:
     run_list:
       - recipe[apt::default]
       - recipe[rundeck::database]
-      - recipe[rundeck::default]
+      - recipe[rundeck::apps]
+      - recipe[rundeck::reverse]
     attributes:
       rundeck:
+        version: '2.4.2-1'
+        database_root_password: 'password'
+        database: 'rundeck'
+        database_user: 'rundeck'
+        database_password: 'password'
+        database_server: 'localhost'
+        apps_server: 'localhost'
+        domain_name: 'rundeck.dev'
+        ssh_user: 'sysadmin'
+        ssh_key_path: '/var/lib/rundeck/.ssh/id_rsa'
