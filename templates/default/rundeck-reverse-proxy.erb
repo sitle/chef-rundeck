@@ -1,0 +1,18 @@
+<VirtualHost *:80>
+  ServerName  <%= node['rundeck']['domain_name'] %>
+  ProxyRequests on
+
+  <Proxy *>
+    <% case node['platform'] %>
+    <% when 'debian' %>
+    Order Deny,Allow
+    Allow from all
+    <% when 'ubuntu' %>
+    Require all granted
+    <% end %>
+  </Proxy>
+
+  ProxyPass / http://localhost:4440/
+  ProxyPassReverse / http://localhost:4440/
+
+</VirtualHost>

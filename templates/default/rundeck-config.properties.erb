@@ -1,0 +1,13 @@
+#loglevel.default is the default log level for jobs: ERROR,WARN,INFO,VERBOSE,DEBUG
+loglevel.default=INFO
+rdeck.base=/var/lib/rundeck
+
+#rss.enabled if set to true enables RSS feeds that are public (non-authenticated)
+rss.enabled=false
+
+# change hostname here
+grails.serverURL=http://<%= node['rundeck']['domain_name'] %>
+dataSource.dbCreate = update
+dataSource.url = jdbc:mysql://<%= node['rundeck']['database_server'] %>/<%= node['rundeck']['database'] %>
+dataSource.username = <%= node['rundeck']['database_user'] %>
+dataSource.password = <%= node['rundeck']['database_password'] %>

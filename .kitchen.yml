@@ -1,15 +1,42 @@
 ---
-driver:
-  name: vagrant
-
-provisioner:
-  name: chef_solo
+driver_plugin: vagrant
+driver_config:
+    require_chef_omnibus: 11.16.4
 
 platforms:
-  - name: ubuntu-12.04
-  - name: centos-6.4
+  - name: ubuntu
+    driver:
+      vagrantfile_erb: Vagrantfile.erb
+      vm_hostname: rundeck.gov.pf
+      box: ubuntu-14.04-chef
+      box_url: http://bit.ly/dsi-ubuntu-1404-box
+      network:
+        - ['private_network', {ip: '172.28.128.3'}]
+      customize:
+        memory: 2048
+        cpus: 2
+  - name: debian
+    driver:
+      vagrantfile_erb: Vagrantfile.erb
+      vm_hostname: rundeck.gov.pf
+      box: debian-7-chef
+      box_url: http://bit.ly/dsi-debian-7-box
+      network:
+        - ['private_network', {ip: '172.28.128.4'}]
+      customize:
+        memory: 2048
+        cpus: 2
+
+provisioner:
+  name: chef_zero
 
 suites:
   - name: default
+    data_bags_path: 'test/integration/default/data_bags'
+    encrypted_data_bag_secret_key_path: 'test/integration/default/encrypted_data_bag_secret'
     run_list:
+      - recipe[apt::default]
+      - recipe[rundeck::database]
+      - recipe[rundeck::default]
     attributes:
+      rundeck:
